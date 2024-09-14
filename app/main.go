@@ -1,16 +1,27 @@
 package main
 
 import (
+	"app/config"
+	"app/routes"
 	"fmt"
+	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World!")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Server is running on http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	config.LoadConfig()
+	config.ConnectDB()
+
+	r := gin.Default()
+	r.GET("/healthchecker", func(c *gin.Context) {
+		message := "Its Works"
+		c.JSON(http.StatusOK, gin.H{"status": "ok", "message": message})
+	})
+
+	routes.AuthRoute(r)
+	routes.BlogRoute(r)
+
+	log.Fatal(r.Run(fmt.Sprintf("127.0.0.1:%v", config.ENV.PORT)))
 }
