@@ -1,7 +1,7 @@
 # Project Installation
 
 1. Clone the project
-   `git clone https://github.com/tegarpratama/depo-bangunan.git`
+   `git clone https://github.com/tegarpratama/bythen`
 
 2. Running docker compose
    `docker-compose up --build -d`
