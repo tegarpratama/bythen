@@ -5,8 +5,6 @@ services:
     environment:
       GOMODCACHE: /go/src/app/.modcache
       GOCACHE: /go/src/app/.cache
-    volumes:
-      - './app:/go/src/app'
     ports:
       - '8080:8080'
     depends_on:

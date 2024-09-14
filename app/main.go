@@ -23,5 +23,5 @@ func main() {
 	routes.AuthRoute(r)
 	routes.BlogRoute(r)
 
-	log.Fatal(r.Run(fmt.Sprintf("127.0.0.1:%v", config.ENV.PORT)))
+	log.Fatal(r.Run(fmt.Sprintf(":%v", config.ENV.PORT)))
 }

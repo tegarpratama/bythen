@@ -1,26 +1,13 @@
-# FROM golang:1.21.0
-
-# ENV GIN_MODE release
-
-# WORKDIR /go/src/app
-
-# RUN go install github.com/air-verse/air@latest
-
-# COPY ./app .
-
-# CMD air
-
-FROM golang:1.21-alpine
+FROM golang:1.22-alpine
 
 WORKDIR /go/src/app
 
-# RUN go install github.com/air-verse/air@latest
+COPY /app/go.mod /app/go.sum ./
+RUN go mod download
 
 COPY ./app .
 
-RUN go mod download
-
-RUN go build -o /main .
+RUN go build -o main .
 
 EXPOSE 8080
 
